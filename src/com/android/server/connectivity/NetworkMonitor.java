@@ -459,6 +459,29 @@ public class NetworkMonitor extends StateMachine {
     }
 
     /**
+     * Receive a DNS event of the default network from ConnectivityService (a failed query,
+     * reported immediately).
+     *
+     * In the factory image the only consumer is the ByteDance NetworkStatusCollect telemetry
+     * (NetworkStatusCollect.addDnsEventInfo(hostname, returnCode, 0, timestamp)), which is not
+     * part of this tree, so the event is accepted and not recorded.
+     */
+    public void updateDnsEvent(String hostname, int returnCode, long timestamp) {
+    }
+
+    /**
+     * Receive a batch of successful DNS events of the default network from ConnectivityService.
+     * The lists are parallel arrays; a null hostname ends the batch.
+     *
+     * In the factory image each entry is handed to the ByteDance NetworkStatusCollect telemetry
+     * (NetworkStatusCollect.addDnsEventInfo), which is not part of this tree, so the events are
+     * accepted and not recorded.
+     */
+    public void updateDnsEvents(String[] hostnameList, int[] returnCodeList,
+            long[] timestampList) {
+    }
+
+    /**
      * Send a notification to NetworkMonitor indicating that private DNS settings have changed.
      * @param newCfg The new private DNS configuration.
      */

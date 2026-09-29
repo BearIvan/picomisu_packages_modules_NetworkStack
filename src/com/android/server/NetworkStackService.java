@@ -358,6 +358,19 @@ public class NetworkStackService extends Service {
         }
 
         @Override
+        public void updateDnsEvent(String hostname, int returnCode, long timestamp) {
+            checkNetworkStackCallingPermission();
+            mNm.updateDnsEvent(hostname, returnCode, timestamp);
+        }
+
+        @Override
+        public void updateDnsEvents(String[] hostnameList, int[] returnCodeList,
+                long[] timestampList) {
+            checkNetworkStackCallingPermission();
+            mNm.updateDnsEvents(hostnameList, returnCodeList, timestampList);
+        }
+
+        @Override
         public void notifyNetworkConnected(LinkProperties lp, NetworkCapabilities nc) {
             checkNetworkStackCallingPermission();
             mNm.notifyNetworkConnected(lp, nc);
